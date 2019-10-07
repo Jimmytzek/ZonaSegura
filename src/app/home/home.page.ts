@@ -1,18 +1,24 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { AuthService } from './../servicios/auth.service';
+import { DatosService } from './../service/datos.service';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 declare var google: any;
 import { Map, tileLayer, marker } from "leaflet";
 import * as L from 'leaflet';
 import * as lr from 'leaflet-routing-machine';
 import { Observable } from 'rxjs';
+import { ToastController } from '@ionic/angular';
 
+import { SMS } from '@ionic-native/sms/ngx';
+import {CallNumber} from '@ionic-native/call-number/ngx';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit{
   @ViewChild('searchbar', { static: false, read: ElementRef }) searchbar: ElementRef;
   address: HTMLInputElement = null;
   routingControl: any;
@@ -24,7 +30,14 @@ export class HomePage {
 
   
 
-  constructor(private geolocation: Geolocation) {
+  constructor(private geolocation: Geolocation,private storage: Storage, private toastCtrl:ToastController,
+     private sms: SMS, private call : CallNumber,private global:AuthService) {
+  }
+
+  ngOnInit(){
+    this.storage.get('dato').then((val) => {
+      this.global.variable = val;
+    });
   }
 
   initAutocomplete() {
@@ -109,4 +122,28 @@ export class HomePage {
       console.log(markerDrag.target._latlng)
     });
   }
+
+  sendSMS(){
+    for(let i = 0; i< this.global.variable.length;i++){
+      this.sms.send(this.global.variable[i]._objectInstance.phoneNumbers[0].value,'help');
+      console.log('This is i',i);
+    }
+    
+    this.presentToast();
+    this.callN();
+  }
+
+  async presentToast(){
+        const toast = await this.toastCtrl.create({
+          message:'¡Mensage enviado!',
+          duration: 2000,
+          position: 'top',
+        });
+        toast.present();
+  }
+
+  callN(){
+    this.call.callNumber('911',true);
+  }
+
 }

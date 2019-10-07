@@ -5,3 +5,7 @@
 .leaflet-top, .leaflet-right {
     display: none!important;
 }
+.position{
+    position: absolute;
+    z-index: 99999;
+}

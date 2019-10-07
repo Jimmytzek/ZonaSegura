@@ -1,3 +1,4 @@
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -21,7 +22,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)
-  ],providers:[Contacts],
+  ],providers:[Contacts,AndroidPermissions],
   declarations: [EntradaPage]
 })
 export class EntradaPageModule {}
