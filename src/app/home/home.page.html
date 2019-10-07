@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Caminando Seguro
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Searchbar with cancel button always shown -->
+  <ion-searchbar class="searchbar" #searchbar showCancelButton="focus" cancelButtonText="X" placeholder="¿A dónde quiere ir?"></ion-searchbar>
+<!-- <ion-icon name="search"></ion-icon>  -->
+
+<div id="myMap" style="width: 100%; height: 100%"></div>
+ <ion-button (click) = "getPositions()">Show Marker</ion-button>
+</ion-content>

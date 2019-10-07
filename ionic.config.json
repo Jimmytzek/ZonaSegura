@@ -1,0 +1,7 @@
+{
+  "name": "zonasegura",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

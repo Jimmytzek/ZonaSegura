@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    
+    
+    <ion-buttons slot="end" (click)="getPositions()">
+      <!-- <ion-button>
+        ¿Donde estoy?
+      </ion-button> -->
+      <ion-chip>
+        <ion-icon name="pin"></ion-icon>
+        <ion-label>¿Donde estoy?</ion-label>
+      </ion-chip>
+    </ion-buttons>
+    
+    <ion-title>
+      Colonias
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar class="searchbar" #searchbar showCancelButton="focus" cancelButtonText="X" placeholder="¿A dónde quiere ir?"></ion-searchbar>
+ 
+  <!-- <div style="background: red" class="map-overlay" id="legend">
+    <ion-button>
+      Rojo
+    </ion-button>
+    <ion-button>
+      Naranja
+    </ion-button>
+  </div> -->
+
+  
+ <div id="myMap" style="width: 100%; height: 100%;z-index:1;"></div>
+  
+  
+  <!-- <ion-button (click) = "getPositions()">Show Marker</ion-button> -->
+    <!-- <div *ngIf="this.map" class="map-overlay" id="legend">
+      <h2>ASDF</h2>
+    </div>
+
+     -->
+
+    <div  id='state-legend' class='legend'>
+      
+      <!-- <ion-button [hidden]="disabledCambio" (click)="zonasRojas()" >Rojo</ion-button>
+      <ion-button [hidden]="disabled" (click)="zonasNaranjas()" >Naranja</ion-button> -->
+      <div [hidden]="disabledCambio" (click)="zonasRojas()"><span style='background-color: #F30505'></span>Peligro Alto</div> 
+      <div [hidden]="disabled"       (click)="zonasNaranjas()"><span style='background-color: #ff7800'></span>Peligro Medio</div>
+      <div [hidden]="disabled2"       (click)="zonasAmarillas()"><span style='background-color: #F3E805'></span>Peligro Bajo</div>
+      <div [hidden]="disabled3"       (click)="zonasVerdes()"><span style='background-color: #29F305'></span>Peligro Muy Bajo</div>
+      
+    </div>
+       
+      
+
+
+</ion-content>

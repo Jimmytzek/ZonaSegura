@@ -1,0 +1,26 @@
+.trasparente{
+    --background: transparent ;
+    --ion-color-base: transparent !important;
+    --ion-color: white;
+}
+.icon{
+size: 100%;
+}
+.astro{
+    max-width: 50%;
+    height: auto;
+    display:block;
+    margin:auto;
+}
+.nombre{
+    text-align: center;
+    font-style: oblique;
+}
+
+.selected{
+    background: #EEE;
+    box-shadow: -3px 5px #999;
+}
+.agenda{
+    size: 25%;
+}
