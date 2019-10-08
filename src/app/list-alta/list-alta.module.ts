@@ -35,8 +35,8 @@ const routes: Routes = [
   ],
   declarations: [ListAltaPage, ModalPagePage, ModalMapProterritorioPage, ModalCaribePage, ModalMapCaribePage, ModalAdolfoLopezMateosPage, ModaMapAdolfoLopezMateosPage, ModalPayoObispoPage, ModalMapPayoObispoPage],
   entryComponents : [ModalPagePage, ModalMapProterritorioPage, ModalCaribePage, ModalMapCaribePage, ModalAdolfoLopezMateosPage, ModaMapAdolfoLopezMateosPage, ModalPayoObispoPage, ModalMapPayoObispoPage],
-  // declarations: [ListAltaPage, ModalPagePage],
-  // entryComponents : [ModalPagePage],
+  // declarations: [ListAltaPage, ModalPagePage, ModalMapProterritorioPage],
+  // entryComponents : [ModalPagePage, ModalMapProterritorioPage],
 
 })
 export class ListAltaPageModule {}
