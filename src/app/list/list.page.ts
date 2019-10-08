@@ -57,6 +57,13 @@ import { coordenadasfranciscoMujica } from '../json/franciscoMujica';
 import { Button } from 'protractor';
 import { Observable } from 'rxjs';
 
+import { ToastController } from '@ionic/angular';
+
+import { SMS } from '@ionic-native/sms/ngx';
+import {CallNumber} from '@ionic-native/call-number/ngx';
+import { Storage } from '@ionic/storage';
+import { AuthService } from './../servicios/auth.service';
+
 @Component({
   selector: 'app-list',
   templateUrl: 'list.page.html',
@@ -263,7 +270,9 @@ export class ListPage implements OnInit {
  poligonos: any[] = [];
  // 
 
-  constructor(private geolocation: Geolocation, private popoverCrtl: PopoverController,  public datosServicios:DatosService, private permission: AndroidPermissions) {
+  constructor(private geolocation: Geolocation, private popoverCrtl: PopoverController,
+      public datosServicios:DatosService, private permission: AndroidPermissions,private storage: Storage, private toastCtrl:ToastController,
+      private sms: SMS, private call : CallNumber,private global:AuthService) {
     this.ref.on('value',resp => {
       this.Data = snapshotToArray(resp);
 
@@ -322,6 +331,9 @@ export class ListPage implements OnInit {
 
 
 ngOnInit() {
+  this.storage.get('dato').then((val) => {
+    this.global.variable = val;
+  });
     this.getPositions();
     this.colonias();
   }
@@ -2376,6 +2388,29 @@ public colonias(){
   //   this.disabledCambio = !this.disabledCambio;
   //  this.disabled = false;
   // }
+
+  sendSMS(){
+    for(let i = 0; i< this.global.variable.length;i++){
+      this.sms.send(this.global.variable[i]._objectInstance.phoneNumbers[0].value,'help');
+      console.log('This is i',i);
+    }
+    
+    this.presentToast();
+    this.callN();
+  }
+
+  async presentToast(){
+        const toast = await this.toastCtrl.create({
+          message:'¡Mensage enviado!',
+          duration: 2000,
+          position: 'top',
+        });
+        toast.present();
+  }
+
+  callN(){
+    this.call.callNumber('911',true);
+  }
 
 
 }
