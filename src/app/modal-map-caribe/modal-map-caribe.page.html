@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="end" (click)= "close()">
+          <!-- <ion-button>
+            ¿Donde estoy?
+          </ion-button> -->
+          <ion-chip>
+            <ion-icon name="close"></ion-icon>
+            <ion-label>Cerrar</ion-label>
+          </ion-chip>
+        </ion-buttons>
+    <ion-title>Colonia Caribe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="mapId" style="width: 100%; height: 100%; z-index:1;">
+  </div>
+
+
+  <div  id='state-legend' class='legend'>
+      
+            <div [hidden]="disabled" (click)="caribe()"><span style='background-color: #F30505'></span>Ver zona</div> 
+      
+    </div>
+</ion-content>

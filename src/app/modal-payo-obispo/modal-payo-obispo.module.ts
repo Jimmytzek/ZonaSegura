@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ModalPagePage } from './modal-page.page';
-import {ModalMapProterritorioPage } from "../modal-map-proterritorio/modal-map-proterritorio.page";
+import { ModalPayoObispoPage } from './modal-payo-obispo.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ModalPagePage
+    component: ModalPayoObispoPage
   }
 ];
 
@@ -22,13 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ModalPagePage ]
+  declarations: [ModalPayoObispoPage]
 })
-export class ModalPagePageModule {}
-
-
-
-
-
-
-
+export class ModalPayoObispoPageModule {}

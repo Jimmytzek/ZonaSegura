@@ -14,20 +14,15 @@
 </ion-header>
 
 <ion-content>
-
-
-   
-      
-
-  <h4 class="centrar">Proterritorio</h4>
+  <h4 class="centrar">Adolfo Lopez Mateos</h4>
   <ion-card>
       <ion-card-header>
-          <img src="../../assets/icon/proterritorio.png">
-        <ion-card-title>Colonia Proterritorio, Código Postal 77086, Chetumal, Quintana Roo.</ion-card-title>
+          <img src="https://images.sipse.com/v5-0Fvm4zUmTjPAWvPiJWrc92O4=/800x497/smart/imgs/032014/07031469823d2d7.jpg">
+        <ion-card-title>Colonia Adolfo Lopez Mateos, Código Postal 77010, Chetumal, Q.R.</ion-card-title>
       </ion-card-header>
     
       <ion-card-content>
-        Es una colonia añeja situada en la ciudad de Chetumal con indice de delicuencia Alto.
+        Es una colonia añeja  situada en la ciudad de Chetumal con indice de delicuencia Alto.
         Se recomienda que al visitar esta Colonia se recorra con precaucion.
       </ion-card-content>
     </ion-card>
@@ -38,7 +33,7 @@
             <label>Horas de mayor incidente:</label> 
         </ion-card-header>
         <ion-card-content>
-          <label>{{almacenaMientoProterritorio.toString()}}</label>
+          <label>{{almacenaMientoCaribe.toString()}}</label>
         </ion-card-content>
 
         
@@ -49,7 +44,9 @@
         <label>{{resultIncidentesCaribe.toString()}}</label>
         <label>Tentativa de robo:   {{tentativaDeRobo_prote}}</label><br>
         <label>Otros casos relacionados con el patrimonio:    {{otrosActosRelacionadosP_Prote}}</label><br>
-        <label>Robo de vehiculo particular sin violencia:    {{roboVehiculoPartiSinViolencia_prote}}</label>
+        <label>Robo a casa habitacion sin violencia:    {{roboCasaHabitacionSinViolencia}}</label><br>
+        <!-- OTROS ACTOS RELACIONADOS CON EL PATRIMONIO
+        -->
       </ion-card-content>
 
 
@@ -57,7 +54,7 @@
         <label>Total de denuncias:</label>
       </ion-card-header>
       <ion-card-content>
-        <label>{{Proterritorio}}</label>
+        <label>{{AdolfoLopezMateos}}</label>
       </ion-card-content>
     </ion-card>          
 </ion-content>
@@ -65,7 +62,7 @@
 <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="start">
-       <ion-button (click)="presentModal()" >
+       <ion-button (click)="presentModalAdolfoLopezMateos()" >
         <ion-icon style="zoom:1.5;" ios="ios-map" md="md-map"></ion-icon>
        </ion-button>
     </ion-buttons>

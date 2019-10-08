@@ -15,7 +15,7 @@
 <ion-list>
   
     <ion-list>
-        <ion-item>
+        <ion-item (click)="presentModalCaribe()">
           <ion-avatar item-start>
             <img src="https://descubro.mx/wp-content/uploads/2018/03/viajemosporquintanaroo1.mx_.jpg">
           </ion-avatar>
@@ -28,6 +28,20 @@
               <img src="https://descubro.mx/wp-content/uploads/2018/03/viajemosporquintanaroo1.mx_.jpg">
             </ion-avatar>
             <label class="espacio">Proterritorio</label>
+          </ion-item>
+
+          <ion-item (click)="presentModalAdolfo()">
+            <ion-avatar item-start>
+              <img src="https://descubro.mx/wp-content/uploads/2018/03/viajemosporquintanaroo1.mx_.jpg">
+            </ion-avatar>
+            <label class="espacio">Adolfo Lopez Mateos</label>
+          </ion-item>
+
+          <ion-item (click)="presentModalPayoObispo()">
+            <ion-avatar item-start>
+              <img src="https://descubro.mx/wp-content/uploads/2018/03/viajemosporquintanaroo1.mx_.jpg">
+            </ion-avatar>
+            <label class="espacio">Payo Obispo</label>
           </ion-item>
        
       </ion-list>

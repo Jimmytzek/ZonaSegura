@@ -19,15 +19,15 @@
    
       
 
-  <h4 class="centrar">Proterritorio</h4>
+  <h4 class="centrar">Payo Obispo</h4>
   <ion-card>
       <ion-card-header>
-          <img src="../../assets/icon/proterritorio.png">
-        <ion-card-title>Colonia Proterritorio, Código Postal 77086, Chetumal, Quintana Roo.</ion-card-title>
+          <img src=" https://imaginary.casafy.com.br/pipeline?operations=[%7B%22operation%22:%22smartcrop%22,%22params%22:%7B%22width%22:570,%22height%22:428%7D%7D,%7B%22operation%22:%22resize%22,%22params%22:%7B%22width%22:570,%22height%22:428%7D%7D]&url=http://fotos.crminmobiliario.com/cliente/1706/fotosproductos/casa-sola-residencial-en-venta-en-colonia-jardines-de-payo-obispo-chetumal-1134.jpg">
+        <ion-card-title>Colonia Payo Obispo, Código Postal 77083 , Chetumal, Q.R.</ion-card-title>
       </ion-card-header>
     
       <ion-card-content>
-        Es una colonia añeja situada en la ciudad de Chetumal con indice de delicuencia Alto.
+        Es una colonia añeja  situada en la ciudad de Chetumal con indice de delicuencia Media.
         Se recomienda que al visitar esta Colonia se recorra con precaucion.
       </ion-card-content>
     </ion-card>
@@ -38,7 +38,7 @@
             <label>Horas de mayor incidente:</label> 
         </ion-card-header>
         <ion-card-content>
-          <label>{{almacenaMientoProterritorio.toString()}}</label>
+          <label>{{almacenaMientoCaribe.toString()}}</label>
         </ion-card-content>
 
         
@@ -48,8 +48,10 @@
       <ion-card-content>
         <label>{{resultIncidentesCaribe.toString()}}</label>
         <label>Tentativa de robo:   {{tentativaDeRobo_prote}}</label><br>
-        <label>Otros casos relacionados con el patrimonio:    {{otrosActosRelacionadosP_Prote}}</label><br>
-        <label>Robo de vehiculo particular sin violencia:    {{roboVehiculoPartiSinViolencia_prote}}</label>
+        <label>Robo a casa habitacion sin violencia:    {{roboCasaHabitacionSinViolencia}}</label><br>
+        <label>Robo de vehiculo particular sin violencia: {{roboVehiculoPartiSinViolencia_prote}}</label>
+        <!-- OTROS ACTOS RELACIONADOS CON EL PATRIMONIO
+        -->
       </ion-card-content>
 
 
@@ -57,7 +59,7 @@
         <label>Total de denuncias:</label>
       </ion-card-header>
       <ion-card-content>
-        <label>{{Proterritorio}}</label>
+        <label>{{PayoObispo}}</label>
       </ion-card-content>
     </ion-card>          
 </ion-content>
@@ -65,7 +67,7 @@
 <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="start">
-       <ion-button (click)="presentModal()" >
+       <ion-button (click)="presentModalAdolfoLopezMateos()" >
         <ion-icon style="zoom:1.5;" ios="ios-map" md="md-map"></ion-icon>
        </ion-button>
     </ion-buttons>

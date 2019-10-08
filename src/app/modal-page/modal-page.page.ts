@@ -7,6 +7,20 @@ import { firebaseConfig, snapshotToArray } from 'src/environments/environment';
 import { NavController, AlertController } from '@ionic/angular';
 import { DatosService } from './../service/datos.service';
 
+import { Map, tileLayer, marker, polyline } from "leaflet";
+
+
+import { PopoverController } from '@ionic/angular';
+
+import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
+
+import * as Leaflet from 'leaflet';
+import * as L from 'leaflet';
+import * as result from '../json/coord';
+
+
+import { ListAltaPage } from "../../app/list-alta/list-alta.page";
+import { ModalMapProterritorioPage } from '../modal-map-proterritorio/modal-map-proterritorio.page';
 
 @Component({
   selector: 'app-modal-page',
@@ -14,6 +28,11 @@ import { DatosService } from './../service/datos.service';
   styleUrls: ['./modal-page.page.scss'],
 })
 export class ModalPagePage implements OnInit {
+
+  map: Map;
+  marker: any;
+  latLong = [];
+
 
   Data = [];
   ref = firebase.database().ref('Data/')
@@ -25,6 +44,24 @@ export class ModalPagePage implements OnInit {
   almacenamientoSolidaridad = [];
   almacenamientoAdolfo = [];
   almacenamientoCentro = [];
+
+
+  incidentesCaribe = []; roboCA = 0;
+  incidenteProte1 = [];  otrosActosRelacionadosP_Prote = 0;
+  incidenteProte2 = [];  tentativaDeRobo_prote = 0;
+  incidenteProte3 = [];  abusoDeConfianza_prote = 0;
+  incidenteProte4 = [];  roboVehiculoPartiSinViolencia_prote = 0;
+  incidenteProte5 = [];  roboEscuelaSinViolencia_prote = 0;
+  incidenteProte6 = []; roboNegocioSinViolencia_prote = 0;
+  incidenteProte7 = [];  roboTrausanteSinviolencia_prote = 0;
+  incidenteProte8 = [];  cristalazoVehiculo_prote = 0;
+  incidenteProte9 = [];  roboCasaHabitacionSinViolencia = 0;
+  incidenteProte10 = [];  allamientoMorada_prote = 0;
+
+
+
+
+  resultIncidentesCaribe = [];
 
 
  //VARIABLES DE ALMACENAMIENTO DE TOTAL DE INCIDENTES
@@ -201,6 +238,8 @@ export class ModalPagePage implements OnInit {
    almacenarHora22Centro = []; Centro22 = 0;
    almacenarHora23Centro = []; Centro23 = 0;
  
+  totalIncidentes = [];
+  
 
   constructor(public modalController: ModalController,  public datosServicios:DatosService) {
     this.ref.on('value',resp => {
@@ -209,6 +248,14 @@ export class ModalPagePage implements OnInit {
     });
    }
 
+   async presentModal() {
+    const modal = await this.modalController.create({
+      component: ModalMapProterritorioPage
+    });
+     modal.present();
+  }
+
+  
   ngOnInit() {
     this.colonias();
   }
@@ -219,6 +266,17 @@ close (){
 
 
 
+
+
+    // marker([18.5168115,-88.3089789,15]).addTo(this.map)
+    //   .bindPopup('Ionic 4 <br> Leaflet.')
+    //   .openPopup();
+
+  
+
+
+ incidentes = [] 
+
 //---------------------RECORRIDO DE DATOS DE COLONIAS EN LA BASE DE DATOS---------------------
 public colonias(){
   this.ref.on('value',resp => {
@@ -226,11 +284,13 @@ public colonias(){
 
       for (let i = 0; i< this.Data.length; i++){
           var valor = this.Data[i];
-
+        
            //--------------------------------------COLONIA PROTERRITORIO ------------------------------------
 
           if (valor.COLONIAS == "Caribe") {
             this.Caribe += 1;
+
+          
 
                //SE OBTIENE LOS HORARIOS EN EN EL QUE FUERON COMETIDOS LOS DELITOS DE "PROTERRITORIO"
                if (valor.HORA >= "0:00:00") {
@@ -414,16 +474,88 @@ public colonias(){
                   this.c23+=1;
                 }
               }
-              
+
+
+            
           }
 
-
+          
           //--------------------------------------COLONIA PROTERRITORIO ------------------------------------
 
           if (valor.COLONIAS == "Proterritorio"){
             this.Proterritorio+=1;
 
+           
+              this.incidentes.push(this.Data[i].TIPO_DE_INCIDENTE);
 
+              if (valor.TIPO_DE_INCIDENTE == "OTROS ACTOS RELACIONADOS CON EL PATRIMONIO"){
+                 this.otrosActosRelacionadosP_Prote +=1;
+                 this.incidenteProte1.push(this.Data[i].TIPO_DE_INCIDENTE);
+              }
+
+              
+              if (valor.TIPO_DE_INCIDENTE == "TENTATIVA DE ROBO"){
+                this.tentativaDeRobo_prote+=1;
+                this.incidenteProte2.push(this.Data[i].TIPO_DE_INCIDENTE);
+             }
+
+             
+                if (valor.TIPO_DE_INCIDENTE == "ABUSO DE CONFIANZA"){
+                  this.abusoDeConfianza_prote+=1;
+                  this.incidenteProte3.push(this.Data[i].TIPO_DE_INCIDENTE);
+
+              }
+
+                if (valor.TIPO_DE_INCIDENTE == "ROBO DE VEHICULO PARTICULAR SIN VIOLENCIA"){
+                  this.roboVehiculoPartiSinViolencia_prote+=1;
+                  this.incidenteProte4.push(this.Data[i].TIPO_DE_INCIDENTE);
+
+              }
+           
+
+                if (valor.TIPO_DE_INCIDENTE == "ROBO A ESCUELA SIN VIOLENCIA"){
+                  this.roboEscuelaSinViolencia_prote+=1;
+                  this.incidenteProte5.push(this.Data[i].TIPO_DE_INCIDENTE);
+
+              }
+
+            
+                if (valor.TIPO_DE_INCIDENTE == "ROBO A NEGOCIO CON VIOLENCIA"){
+                  this.roboNegocioSinViolencia_prote+=1;
+                  this.incidenteProte6.push(this.Data[i].TIPO_DE_INCIDENTE);
+
+                }
+
+
+          
+                if (valor.TIPO_DE_INCIDENTE == "ROBO A TRANSEUNTE CON VIOLENCIA"){
+                  this.roboTrausanteSinviolencia_prote+=1;
+                  this.incidenteProte7.push(this.Data[i].TIPO_DE_INCIDENTE);
+
+              }
+
+              
+                if (valor.TIPO_DE_INCIDENTE == "CRISTALAZO O ROBO AL INTERIOR DE VEHICULO"){
+                  this.cristalazoVehiculo_prote+=1;
+                  this.incidenteProte8.push(this.Data[i].TIPO_DE_INCIDENTE);
+
+              }
+
+            
+              if (valor.TIPO_DE_INCIDENTE == "ROBO A CASA HABITACION SIN VIOLENCIA"){
+                this.roboCasaHabitacionSinViolencia+=1;
+                this.incidenteProte9.push(this.Data[i].TIPO_DE_INCIDENTE);
+
+            }
+
+              
+              if (valor.TIPO_DE_INCIDENTE == "ALLANAMIENTO DE MORADA"){
+                this.allamientoMorada_prote+=1;
+                this.incidenteProte10.push(this.Data[i].TIPO_DE_INCIDENTE);
+
+              }
+
+           
               //Se obtiene la cantidad de delitos que sucedieron en cada hora
               if (valor.HORA >= "0:00:00") {
                 if (valor.HORA <= "0:59:00") {
@@ -613,7 +745,7 @@ public colonias(){
             this.MiraFlores+=1;
           }
 
-          //--------------------------------------COLONIA SOLIDARIDAD ------------------------------------
+//           //--------------------------------------COLONIA SOLIDARIDAD ------------------------------------
 
           if (valor.COLONIAS == "Solidaridad"){
             this.Solidaridad+=1;
@@ -1382,13 +1514,126 @@ public colonias(){
               this.almacenaMientoCaribe.push("23:00");
             }
 
+          
+
+
+            // //********************************************************* */
+            // //Comparacion de la hora de la colonia Proterritorio
+            // //********************************************************* */
+            if (this.Pro24 >= 8){
+              this.almacenaMientoProterritorio.push("00:00");
+            }
+            if (this.Pro1 >= 8){
+              this.almacenaMientoProterritorio.push("1:00");
+            }
+            if (this.Pro2 >= 8){
+              this.almacenaMientoProterritorio.push("2:00");
+            }
+            if (this.Pro3 >= 8){
+              this.almacenaMientoProterritorio.push("3:00");
+            }
+            if (this.Pro4 >= 8){
+              this.almacenaMientoProterritorio.push("4:00");
+            }
+            if (this.Pro5 >= 8){
+              this.almacenaMientoProterritorio.push("5:00");
+            }
+            if (this.Pro6 >= 8){
+              this.almacenaMientoProterritorio.push("6:00");
+            }
+            if (this.Pro7 >= 8){
+              this.almacenaMientoProterritorio.push("7:00");
+            }
+            if (this.Pro8 >= 8){
+              this.almacenaMientoProterritorio.push("8:00");
+            }
+            if (this.Pro9 >= 8){
+              this.almacenaMientoProterritorio.push("9:00");
+            }
+            if (this.Pro10 >= 8){
+              this.almacenaMientoProterritorio.push("10:00");
+            }
+            if (this.Pro11 >= 8){
+              this.almacenaMientoProterritorio.push("11:00");
+            }
+            if (this.Pro12 >= 8){
+              this.almacenaMientoProterritorio.push("12:00");
+            }
+            if (this.Pro13 >= 8){
+              this.almacenaMientoProterritorio.push("13:00");
+            }
+            if (this.Pro14 >= 8){
+              this.almacenaMientoProterritorio.push("14:00");
+            }
+
+            if (this.Pro15 >= 8){
+              this.almacenaMientoProterritorio.push("15:00");
+            }
+
+            if (this.Pro16 >= 8){
+              this.almacenaMientoProterritorio.push("16:00");
+            }
+
+            if (this.Pro17 >= 8){
+              this.almacenaMientoProterritorio.push("17:00");
+            }
+
+            if (this.Pro18 >= 8){
+              this.almacenaMientoProterritorio.push("18:00");
+            }
+            if (this.Pro19 >= 8){
+              this.almacenaMientoProterritorio.push("19:00");
+            }
+
+            if (this.Pro20 >= 8){
+              this.almacenaMientoProterritorio.push("20:00");
+            }
+
+            if (this.Pro21 >= 8){
+              this.almacenaMientoProterritorio.push("21:00");
+            }
+
+            if (this.Pro22 >= 8){
+              this.almacenaMientoProterritorio.push("22:00");
+            }
+
+            if (this.Pro23 >= 8){
+              this.almacenaMientoProterritorio.push("23:00");
+            }
+
 
     });
+
+
+    // console.log(this.incidentes);
+    // console.log(this.resultIncidentesCaribe)
+    // console.log(this.incidentesCaribe);
      
+
+    console.log(this.almacenaMientoProterritorio);
+    console.log(this.incidentes);
+
+
+    //console.log(this.incidentesCaribe);
+    console.log(this.incidenteProte1);
+    console.log(this.incidenteProte2);
+    console.log(this.incidenteProte3);
+    console.log(this.incidenteProte4);
+    console.log(this.incidenteProte5);
+    console.log(this.incidenteProte6);
+    console.log(this.incidenteProte7);
+    console.log(this.incidenteProte8);
+    console.log(this.incidenteProte9);
+    console.log(this.incidenteProte10);
+    
+            
   }
 
+ 
   prueba(){
     console.log(this.almacenaMientoCaribe.toString());
   }
+
+  
 
 }

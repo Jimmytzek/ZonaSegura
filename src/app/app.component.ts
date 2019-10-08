@@ -14,6 +14,21 @@ import{timer} from 'rxjs';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  
+    public appPages = [
+      {
+        title: 'Colonias',
+        url: '/list',
+        icon: 'md-locate',
+           
+      },
+      {
+        title: 'Lista de colonias',
+        url: '/list-alta',
+        icon: 'md-list-box',
+           
+      }
+    ];
 
   showSplash= true;
   constructor(
