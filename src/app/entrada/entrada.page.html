@@ -93,7 +93,7 @@
         </ion-col>
         <ion-col>
           <ion-card-content>
-            <ion-card-title color="dark">Contactoss</ion-card-title>
+            <ion-card-title color="dark">Contactos</ion-card-title>
             <ion-select multiple="true" [(ngModel)]="MContacts" (ionChange)="saveContascts()" color="light" okText="Ok"
               cancelText="Cancelar">
               <ion-select-option *ngFor="let c of myContacts" [value]="c"><b>{{c.name.givenName}}</b>
