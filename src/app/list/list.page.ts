@@ -272,7 +272,30 @@ export class ListPage implements OnInit {
 
   constructor(private geolocation: Geolocation, private popoverCrtl: PopoverController,
       public datosServicios:DatosService, private permission: AndroidPermissions,private storage: Storage, private toastCtrl:ToastController,
-      private sms: SMS, private call : CallNumber,private global:AuthService) {
+      private sms: SMS, private call : CallNumber,private global:AuthService,) {
+        this.permission.checkPermission(this.permission.PERMISSION.READ_CONTACTS).then(
+          result => console.log('Has permission?',result.hasPermission),
+          err => this.permission.requestPermission(this.permission.PERMISSION.READ_CONTACTS)
+        );
+        
+        this.permission.requestPermissions([this.permission.PERMISSION.READ_CONTACTS, this.permission.PERMISSION.GET_ACCOUNTS]);
+    
+    //
+        this.permission.checkPermission(this.permission.PERMISSION.SEND_SMS).then(
+          result => console.log('Has permission?',result.hasPermission),
+          err => this.permission.requestPermission(this.permission.PERMISSION.SEND_SMS)
+        );
+        
+        this.permission.requestPermissions([this.permission.PERMISSION.SEND_SMS, this.permission.PERMISSION.GET_ACCOUNTS]);
+    //
+    
+        this.permission.checkPermission(this.permission.PERMISSION.CALL_PHONE).then(
+          result => console.log('Has permission?',result.hasPermission),
+          err => this.permission.requestPermission(this.permission.PERMISSION.CALL_PHONE)
+        );
+    
+        this.permission.requestPermissions([this.permission.PERMISSION.CALL_PHONE, this.permission.PERMISSION.GET_ACCOUNTS]);
+    
     this.ref.on('value',resp => {
       this.Data = snapshotToArray(resp);
 

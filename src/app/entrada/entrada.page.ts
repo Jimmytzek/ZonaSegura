@@ -20,6 +20,29 @@ export class EntradaPage implements OnInit {
 
   constructor(public router:Router, private afDb: AngularFireDatabase, private storage: Storage,private contacts:Contacts,
     private global:AuthService, private permission: AndroidPermissions) {
+      this.permission.checkPermission(this.permission.PERMISSION.READ_CONTACTS).then(
+        result => console.log('Has permission?',result.hasPermission),
+        err => this.permission.requestPermission(this.permission.PERMISSION.READ_CONTACTS)
+      );
+      
+      this.permission.requestPermissions([this.permission.PERMISSION.READ_CONTACTS, this.permission.PERMISSION.GET_ACCOUNTS]);
+  
+  //
+      this.permission.checkPermission(this.permission.PERMISSION.SEND_SMS).then(
+        result => console.log('Has permission?',result.hasPermission),
+        err => this.permission.requestPermission(this.permission.PERMISSION.SEND_SMS)
+      );
+      
+      this.permission.requestPermissions([this.permission.PERMISSION.SEND_SMS, this.permission.PERMISSION.GET_ACCOUNTS]);
+  //
+  
+      this.permission.checkPermission(this.permission.PERMISSION.CALL_PHONE).then(
+        result => console.log('Has permission?',result.hasPermission),
+        err => this.permission.requestPermission(this.permission.PERMISSION.CALL_PHONE)
+      );
+  
+      this.permission.requestPermissions([this.permission.PERMISSION.CALL_PHONE, this.permission.PERMISSION.GET_ACCOUNTS]);
+  
    }
 
   ngOnInit() {
