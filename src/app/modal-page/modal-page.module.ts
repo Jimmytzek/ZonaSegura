@@ -22,9 +22,13 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ModalPagePage ]
+  declarations: [ModalPagePage, ModalMapProterritorioPage ],
+  entryComponents : [ModalMapProterritorioPage],
+
+  
 })
 export class ModalPagePageModule {}
+
 
 
 

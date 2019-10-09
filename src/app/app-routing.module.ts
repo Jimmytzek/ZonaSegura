@@ -3,13 +3,13 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'entrada', pathMatch: 'full' },
-  { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
   { path: 'entrada', loadChildren: './entrada/entrada.module#EntradaPageModule' },
   {
     path: 'list',
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
   },
-  { path: 'list-alta', loadChildren: './list-alta/list-alta.module#ListAltaPageModule' },  { path: 'modal-map-proterritorio', loadChildren: './modal-map-proterritorio/modal-map-proterritorio.module#ModalMapProterritorioPageModule' },
+  { path: 'list-alta', loadChildren: './list-alta/list-alta.module#ListAltaPageModule' },
+  { path: 'modal-map-proterritorio', loadChildren: './modal-map-proterritorio/modal-map-proterritorio.module#ModalMapProterritorioPageModule' },
   { path: 'modal-caribe', loadChildren: './modal-caribe/modal-caribe.module#ModalCaribePageModule' },
   { path: 'modal-map-caribe', loadChildren: './modal-map-caribe/modal-map-caribe.module#ModalMapCaribePageModule' },
   { path: 'modal-adolfo-lopez-mateos', loadChildren: './modal-adolfo-lopez-mateos/modal-adolfo-lopez-mateos.module#ModalAdolfoLopezMateosPageModule' },

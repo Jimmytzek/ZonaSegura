@@ -388,7 +388,8 @@ ngOnInit() {
   }
   
   setMarker(latlng) {
-    this.map.removeLayer(this.marker);
+    if(this.marker)
+      this.map.removeLayer(this.marker);
     this.marker = marker(latlng, { draggable:true });
     this.marker.addTo(this.map)
       .bindPopup('Hey, aqui estoy!').openPopup();
