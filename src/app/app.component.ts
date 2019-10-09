@@ -1,3 +1,4 @@
+import { ModalPagePageModule } from './modal-page/modal-page.module';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
@@ -7,6 +8,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
 import{timer} from 'rxjs';
+import { ModalPagePage } from './modal-page/modal-page.page';
+
 
 @Component({
   selector: 'app-root',
